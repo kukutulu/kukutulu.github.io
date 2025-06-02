@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blue Whale</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(135deg, #0a0a0a, #1a1a2e, #16213e);
+        min-height: 100vh;
+        font-family: "Arial", sans-serif;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .neon-text {
+        font-size: 4rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: #fff;
+        text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff,
+          0 0 40px #00ffff, 0 0 80px #00ffff;
+        animation: flicker 2s infinite alternate;
+        margin-bottom: 3rem;
+      }
+
+      @keyframes flicker {
+        0%,
+        18%,
+        22%,
+        25%,
+        53%,
+        57%,
+        100% {
+          text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff,
+            0 0 40px #00ffff, 0 0 80px #00ffff;
+        }
+        20%,
+        24%,
+        55% {
+          text-shadow: 0 0 2px #00ffff, 0 0 5px #00ffff, 0 0 8px #00ffff,
+            0 0 12px #00ffff, 0 0 20px #00ffff;
+        }
+      }
+
+      .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.3);
+        border: 2px solid #ff006e;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255, 0, 110, 0.5),
+          inset 0 0 20px rgba(255, 0, 110, 0.1);
+        margin: 2rem 0;
+        position: relative;
+      }
+
+      .marquee-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        animation: shine 3s infinite;
+      }
+
+      @keyframes shine {
+        0% {
+          left: -100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      .marquee-text {
+        display: flex;
+        animation: scroll 20s linear infinite;
+        white-space: nowrap;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #1c8cf3;
+        text-shadow: 0 0 10px #1c8cf3, 0 0 20px #1c8cf3, 0 0 30px #1c8cf3;
+        padding: 1rem 0;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .rainbow-marquee {
+        margin: 2rem 0;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+        padding: 1rem;
+        overflow: hidden;
+      }
+
+      .rainbow-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        white-space: nowrap;
+        animation: moveRight 15s linear infinite;
+      }
+
+      .rainbow-text {
+        font-weight: bold;
+        background: linear-gradient(
+          45deg,
+          #ff0000,
+          #ff8800,
+          #ffff00,
+          #88ff00,
+          #00ff00,
+          #00ff88,
+          #00ffff,
+          #0088ff,
+          #0000ff,
+          #8800ff,
+          #ff00ff,
+          #ff0088
+        );
+        background-size: 400% 400%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: rainbow 3s ease-in-out infinite;
+      }
+
+      @keyframes rainbow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes moveRight {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100vw);
+        }
+      }
+
+      .pulse-text {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #39ff14;
+        text-align: center;
+        margin: 3rem 0;
+        text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 40px #39ff14;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 40px #39ff14;
+        }
+        50% {
+          transform: scale(1.1);
+          text-shadow: 0 0 20px #39ff14, 0 0 40px #39ff14, 0 0 60px #39ff14,
+            0 0 80px #39ff14;
+        }
+      }
+
+      .typewriter {
+        font-size: 2rem;
+        color: #fff;
+        text-shadow: 0 0 10px #fff;
+        margin: 2rem 0;
+        overflow: hidden;
+        border-right: 3px solid #fff;
+        white-space: nowrap;
+        animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: #fff;
+        }
+      }
+
+      .floating-text {
+        position: fixed;
+        top: 20%;
+        left: 10%;
+        font-size: 1.5rem;
+        color: #ffd700;
+        text-shadow: 0 0 15px #ffd700;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        33% {
+          transform: translateY(-20px) rotate(2deg);
+        }
+        66% {
+          transform: translateY(10px) rotate(-1deg);
+        }
+      }
+
+      .controls {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 1rem;
+        border-radius: 10px;
+        border: 1px solid #333;
+      }
+
+      .control-btn {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border: none;
+        color: white;
+        padding: 0.5rem 1rem;
+        margin: 0.25rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .control-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      @media (max-width: 768px) {
+        .neon-text {
+          font-size: 2.5rem;
+        }
+        .marquee-text {
+          font-size: 1.5rem;
+        }
+        .rainbow-text {
+          font-size: 2rem;
+        }
+        .pulse-text {
+          font-size: 2rem;
+        }
+        .typewriter {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="neon-text">🐋 BLUE WHALE 🐋</div>
+
+    <div class="marquee-container">
+      <div class="marquee-text">
+        🐋 Ẩn mình trong đại dương 🐋 Ngoi lên đầy mạnh mẽ 🐋 Cá voi xanh, tiếng
+        hát của biển sâu 🐋
+      </div>
+    </div>
+
+    <div class="rainbow-marquee">
+      <div class="rainbow-container">
+        <span style="margin-right: 10px">🌈</span>
+        <div class="rainbow-text">Alo, nghe bài trình chưa?</div>
+        <span style="margin-left: 10px">🌈</span>
+      </div>
+    </div>
+
+    <div class="pulse-text">Năng lượng! Bùng lổ!</div>
+
+    <div class="floating-text">⭐ Bứt phá ⭐</div>
+
+    <div class="controls">
+      <button class="control-btn" onclick="addRandomMember()">
+        Add Random Member
+      </button>
+      <button class="control-btn" onclick="toggleAnimation()">
+        Toggle Animations
+      </button>
+    </div>
+
+    <script>
+      let animationsEnabled = true;
+      const colors = [
+        "#00ffff",
+        "#ff006e",
+        "#39ff14",
+        "#ffd700",
+        "#ff4444",
+        "#8a2be2",
+        "#00ffff",
+        "#ff006e",
+        "#39ff14",
+        "#ffd700",
+        "#ff4444",
+        "#8a2be2",
+      ];
+      let colorIndex = 0;
+
+      function addRandomMember() {
+        const messages = [
+          "🚀 Trịnh Tuấn Đạt!",
+          "🍻 Lê Đình Quyền",
+          "⚡ Nguyễn Huy Hải",
+          "🔥 Trần Trọng Hiệp",
+          "💎 Trần Thanh Hằng",
+          "🌟 Lê Đức Hiển",
+          "🎭 Phan Mỹ Hạnh",
+          "🎉 Nguyễn Phương Lan",
+          "🎨 Trần Mạnh Đức",
+          "♿️ Phạm Minh Tuấn",
+          "🔊 Trương Gia Bách",
+        ];
+
+        const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+        const newText = document.createElement("div");
+        newText.className = "floating-text";
+        newText.textContent = randomMsg;
+        newText.style.top = Math.random() * 60 + 20 + "%";
+        newText.style.left = Math.random() * 80 + 10 + "%";
+        newText.style.color = colors[Math.floor(Math.random() * colors.length)];
+        newText.style.textShadow = `0 0 15px ${newText.style.color}`;
+
+        document.body.appendChild(newText);
+
+        setTimeout(() => {
+          newText.remove();
+        }, 8000);
+      }
+
+      function toggleAnimation() {
+        animationsEnabled = !animationsEnabled;
+        const elements = document.querySelectorAll("*");
+
+        elements.forEach((el) => {
+          if (animationsEnabled) {
+            el.style.animationPlayState = "running";
+          } else {
+            el.style.animationPlayState = "paused";
+          }
+        });
+      }
+
+      // Auto-generate floating member every 5 seconds
+      setInterval(addRandomMember, 5000);
+
+      // Add initial sparkle effects
+      for (let i = 0; i < 5; i++) {
+        setTimeout(addRandomMember, i * 1000);
+      }
+    </script>
+  </body>
+</html>
